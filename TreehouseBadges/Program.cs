@@ -16,7 +16,12 @@ namespace TreehouseBadges
 			DirectoryInfo directory = new DirectoryInfo(currentDirectory);
 			var fileName = Path.Combine(directory.FullName, "dawson.json");
 			var fileContents = ReadFile(fileName);
-			Console.WriteLine(fileContents);
+			string [] fileLines = fileContents.Split(new char[] { '\r', '\n', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+			foreach(var line in fileLines)
+			{
+				Console.WriteLine(line);
+			}
+			
 			
 		}
 
