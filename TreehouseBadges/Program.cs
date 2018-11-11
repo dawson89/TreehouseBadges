@@ -14,26 +14,18 @@ namespace TreehouseBadges
 		{
 			string currentDirectory = Directory.GetCurrentDirectory();
 			DirectoryInfo directory = new DirectoryInfo(currentDirectory);
+			var fileName = Path.Combine(directory.FullName, "dawson.json");
+			var fileContents = ReadFile(fileName);
+			Console.WriteLine(fileContents);
+			
+		}
 
-			//var files = directory.GetFiles();
-			//foreach (var file in files)
-			//{
-			//	Console.WriteLine(file.Name);
-			//}
-
-			var FileName = Path.Combine(directory.FullName, "data.txt.");
-			var file = new FileInfo(FileName);
-			if (file.Exists)
+		public static string ReadFile(string fileName)
+		{
+			using (var reader = new StreamReader(fileName))
 			{
-				//Allows dispose method to run so you don't have to run a close method
-				using (var reader = new StreamReader(file.FullName))
-				{
-					Console.SetIn(reader);
-					Console.WriteLine(Console.ReadLine());
-				}
-
+				return reader.ReadToEnd();
 			}
-
 		}
 	}
 }
