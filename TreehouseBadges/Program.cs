@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+
 
 namespace TreehouseBadges
 {
@@ -10,12 +12,14 @@ namespace TreehouseBadges
 	{
 		static void Main(string[] args)
 		{
-			// The code provided will print ‘Hello World’ to the console.
-			// Press Ctrl+F5 (or go to Debug > Start Without Debugging) to run your app.
-			Console.WriteLine("Hello World");
-			Console.ReadKey();
+			string currentDirectory = Directory.GetCurrentDirectory();
+			DirectoryInfo directory = new DirectoryInfo(currentDirectory);
+			var files = directory.GetFiles();
+			foreach (var file in files)
+			{
+				Console.WriteLine(file.Name);
+			}
 
-			// Go to http://aka.ms/dotnet-get-started-console to continue learning how to build a console app! 
 		}
 	}
 }
