@@ -14,10 +14,24 @@ namespace TreehouseBadges
 		{
 			string currentDirectory = Directory.GetCurrentDirectory();
 			DirectoryInfo directory = new DirectoryInfo(currentDirectory);
-			var files = directory.GetFiles();
-			foreach (var file in files)
+
+			//var files = directory.GetFiles();
+			//foreach (var file in files)
+			//{
+			//	Console.WriteLine(file.Name);
+			//}
+
+			var FileName = Path.Combine(directory.FullName, "data.txt.");
+			var file = new FileInfo(FileName);
+			if (file.Exists)
 			{
-				Console.WriteLine(file.Name);
+				//Allows dispose method to run so you don't have to run a close method
+				using (var reader = new StreamReader(file.FullName))
+				{
+					Console.SetIn(reader);
+					Console.WriteLine(Console.ReadLine());
+				}
+
 			}
 
 		}
