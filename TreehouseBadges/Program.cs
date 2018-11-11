@@ -15,14 +15,7 @@ namespace TreehouseBadges
 			string currentDirectory = Directory.GetCurrentDirectory();
 			DirectoryInfo directory = new DirectoryInfo(currentDirectory);
 			var fileName = Path.Combine(directory.FullName, "dawson.json");
-			var fileContents = ReadFile(fileName);
-			string [] fileLines = fileContents.Split(new char[] { '\r', '\n', '\t' }, StringSplitOptions.RemoveEmptyEntries);
-			foreach(var line in fileLines)
-			{
-				Console.WriteLine(line);
-			}
-			
-			
+			var fileContents = ReadBadgeResults(fileName);			
 		}
 
 		public static string ReadFile(string fileName)
@@ -31,6 +24,22 @@ namespace TreehouseBadges
 			{
 				return reader.ReadToEnd();
 			}
+		}
+
+		public static List<string[]> ReadBadgeResults(string fileName)
+		{
+			var badgeResults = new List<string[]>();
+			using (var reader = new StringReader(fileName))
+			{
+				string line = "";
+				while((line = reader.ReadLine()) != null)
+				{
+					string[] values = line.Split(',');
+					badgeResults.Add(values);
+
+				}
+			}
+			return badgeResults;
 		}
 	}
 }
